@@ -1,0 +1,7 @@
+var nationality = "Pakistani";
+
+var age = 25;
+
+var isFeePaid = true;
+
+var weight = 60.55;

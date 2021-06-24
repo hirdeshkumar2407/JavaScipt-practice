@@ -1,0 +1,11 @@
+typeof "Hello" //returns strings
+
+typeof a //returns 
+
+var age = 34;
+var name = "Hello";
+var isFeePaid = false;
+
+console.log(typeof age)
+console.log(typeof name)
+console.log(typeof isFeePaid)

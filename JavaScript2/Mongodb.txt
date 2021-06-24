@@ -1,0 +1,247 @@
+test1
+
+collection = table
+
+primary - foreign = embemde the collection
+
+to show all the db in system:
+show dbs
+
+to login in the db:
+
+use dbname
+
+To view collection:
+show collections
+
+To delete database
+db.dropDatabase()
+
+To create new db (note it wont show in show dbs untill no collection is made):
+use dbname
+
+to seee the cuurrently logged db:
+db
+
+create new collection
+db.createCollection('posts')
+
+
+1 data insertion in collection
+db.posts.insert({
+  title: 'Post One',
+  body: 'Body of post one',
+  category: 'News',
+  tags: ['news', 'events'],
+  user: {
+    name: 'John Doe',
+    status: 'author'
+  },
+  date: Date()
+})
+
+
+many date insertion in collection
+db.posts.insertMany(
+[
+{
+title:'Post Two',
+ body:'Body of post two',
+ category:'Technology',
+ date: Date()
+},
+{
+title:'Post Three',
+ body:'Body of post three',
+ category:'News',
+ date: Date()
+},
+{
+title:'Post Four',
+ body:'Body of post four',
+ category:'Entertainment',
+ date: Date()
+},
+]
+)
+
+
+view a collection
+ db.posts.find().pretty()
+
+to find a category = news
+db.posts.find({category: 'News'}).pretty()
+
+(sorting 
+# asc
+db.posts.find().sort({ title: 1 }).pretty()
+# desc
+db.posts.find().sort({ title: -1 }).pretty()
+
+
+## Count Rows
+
+```
+db.posts.find().count()
+db.posts.find({ category: 'News' }).count()
+```
+
+## Limit Rows
+
+```
+db.posts.find().limit(2).pretty()
+```
+
+
+## Chaining sort and limit
+
+```
+db.posts.find().limit(2).sort({ title: 1 }).pretty()
+```
+
+## Foreach title
+
+```
+db.posts.find().forEach(function(doc) {
+  print("Blog Post: " + doc.title)
+})
+
+for find one 
+db.posts.findOne({category :'News'}).
+
+## Foreach
+
+```
+db.posts.find().forEach(function(doc) {
+  print("Blog Post: " + doc.title)
+})
+
+
+## Find Specific Fields
+
+```
+db.posts.find({ title: 'Post One' }, {
+  title: 1,
+  author: 1
+})
+```
+
+## Way 1 of update all file
+db.posts.update({ title: 'Post Two' },
+{
+  title: 'Post Two',
+  body: 'New body for post 2',
+  date: Date()
+},
+{
+  upsert: true
+})
+
+
+## Way 2 of update some part of file
+db.posts.update({ title: 'Post Two' },
+{
+  $set: {
+    body: 'Body for post 2',
+    category: 'Technology'
+  }
+})
+
+
+
+## Increment Field (\$inc)
+
+```
+db.posts.update({ title: 'Post Two' },
+{
+  $inc: {
+    likes: 5
+  }
+})
+```
+
+## Rename Field
+
+```
+db.posts.update({ title: 'Post Two' },
+{
+  $rename: {
+    likes: 'views'
+  }
+})
+```
+to remove rows
+db.posts.remove({ title: 'Post Four' })
+
+
+
+## Sub-Documents
+
+```
+db.posts.update({ title: 'Post One' },
+{
+  $set: {
+    comments: [
+      {
+        body: 'Comment One',
+        user: 'Mary Williams',
+        date: Date()
+      },
+      {
+        body: 'Comment Two',
+        user: 'Harry White',
+        date: Date()
+      }
+    ]
+  }
+})
+```
+
+
+## Find By Element in Array (\$elemMatch)
+
+```
+db.posts.find({
+  comments: {
+     $elemMatch: {
+       user: 'Mary Williams'
+       }
+    }
+  }
+)
+```
+
+## Add Index
+
+```
+db.posts.createIndex({ title: 'text' })
+
+
+## Text Search
+
+```
+db.posts.find({
+  $text: {
+    $search: "\"Post O\""
+    }
+})
+``
+
+## Text Search
+
+```
+db.posts.find({
+  $text: {
+    $search: "\"Post T\""
+    }
+})
+````
+
+## Greater & Less Than
+
+```
+db.posts.find({ views: { $gt: 2 } })
+db.posts.find({ views: { $gte: 7 } })
+db.posts.find({ views: { $lt: 7 } })
+db.posts.find({ views: { $lte: 7 } })
+```

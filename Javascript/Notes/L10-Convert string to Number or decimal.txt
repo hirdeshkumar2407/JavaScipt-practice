@@ -1,0 +1,10 @@
+var age = prompt("What is your age ?");
+var num =4;
+var sum = parseInt(age) +num ;
+console.log(sum);
+
+
+var age = prompt("What is your age ?");
+var num =4;
+var sum = parseFloat(age) +num ;
+console.log(sum);

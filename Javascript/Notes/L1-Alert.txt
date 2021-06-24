@@ -1,0 +1,4 @@
+Purposez: A box that popus to give user a message. A builtin function 
+
+example: alert("Hello World");
+	also window.alert("Hello World");

@@ -1,0 +1,19 @@
+var age = 12
+ var newAge = ++age;
+ console.log(age);
+ console.log(newAge);
+
+ var age = 12
+ var newAge = age++;
+ console.log(age);
+ console.log(newAge);
+/*
+
+
+result:
+13
+13 
+13
+12
+
+*/
